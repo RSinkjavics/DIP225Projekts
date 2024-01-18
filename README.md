@@ -1,15 +1,15 @@
 # DIP225Projekts
 ## Ievads
-# Ievads
+### Ievads
 Mūsu projekts koncentrējas uz uzdevumu pārvaldības lietotnes izstrādi, izmantojot Python programmēšanas valodu. Šī lietotne izmanto Tkinter, lai izveidotu lietotājam draudzīgu saskarni, integrē būtiskas funkcijas ar pandas datu manipulēšanai un uzglabāšanai CSV failā, kā arī esam iekļāvuši smtplib bibliotēku ikdienas uzdevumu e-pasta ziņojumu sūtīšanai un uzdevumu progressa ziņai.
-# Mērķis
+### Mērķis
 Mūsu uzdevumu pārvaldības lietotnes projekta galvenais mērķis ir izveidot daudzpusīgu un intuitīvu rīku, kas vienkāršo ikdienas uzdevumu pārvaldīšanas sarežģītību.
-# Apraksts
+### Apraksts
 Projekts ietver uzdevumu pārvaldības lietojumprogrammu un e-pasta paziņojumu sistēmu. Uzdevumu pārvaldības lietojumprogramma ļauj lietotājiem nemanāmi izveidot, atjaunināt un pārvaldīt savus uzdevumus, izmantojot intuitīvu grafisko lietotāja interfeisu (GUI). Uzdevumi tiek pastāvīgi glabāti CSV failā, nodrošinot datu integritāti un pieejamību sesijās.
 E-pasta paziņojumu sistēma automatizē atgādināšanas procesu lietotājiem par gaidāmajiem uzdevumiem un nodrošina progresa ziņojumus ar iepriekš noteiktiem intervāliem. Izmantojot smtplib bibliotēku, sistēma izveido drošu savienojumu ar SMTP serveri, lai nosūtītu e-pastus. Turklāt pandu bibliotēka tiek izmantota efektīvai datu apstrādei, ļaujot ģenerēt ieskatamus progresa ziņojumus, pamatojoties uz uzdevuma statusu un pabeigšanu.
 E-pasta paziņojuma failus ir domāts palaists izmantojot "Task Scheduler" applikāciju, kas Windows datoros ir jau instalēta, uzstādot, ka tie darbojos noteiktos laikos/intervālos.
 ## Programmsistēmas projektējums
-# Uzdevumu analīze:
+### Uzdevumu analīze:
 1. Lietotāja interfeisa dizains ar Tkinter:
     - Izstrādāt un izveidot lietojumprogrammas galveno logu, izmantojot Tkinter.
     - Ieviest pogas un ievades laukus uzdevumu pievienošanai, rediģēšanai un dzēšanai.
@@ -26,7 +26,7 @@ E-pasta paziņojuma failus ir domāts palaists izmantojot "Task Scheduler" appli
     - Atkļūdojiet visas problēmas vai kļūdas, kas rodas testēšanas laikā.
 5. Dokumentācija:
     - Kompilēt README failu ar projekta dokumentāciju.
-# Pielietotās bibliotekas
+### Pielietotās bibliotekas
 - tkinter
     - Tkinter ir standarta Python bibliotēka grafisko lietotāja interfeisu (GUI) izveidei. 
     - Šajā kodā tas tiek izmantots, lai izveidotu galveno lietojumprogrammas logu, pogas, "labels" un citus GUI elementus.
@@ -50,7 +50,7 @@ E-pasta paziņojuma failus ir domāts palaists izmantojot "Task Scheduler" appli
 - email.mime.multipart 
     - Šo e-pasta pakotnes moduli izmanto, lai izveidotu MIME vairāku daļu ziņojumu. Tas ļauj e-pastam pievienot vairākas daļas (tekstu, attēlus utt.). 
     - Šajā kodā tas tiek izmantots, lai pievienotu vienkārša teksta daļu, kas izveidota ar MIMEText.
-# Koda funkcijas
+### Koda funkcijas
 1. main.py
     - __innit__
         - Šī metoda inicializē uzdevuma pārvaldnieka logu izmantojot Tkinter un veic šādus uzdevumus:
@@ -235,7 +235,7 @@ E-pasta paziņojuma failus ir domāts palaists izmantojot "Task Scheduler" appli
             - Apkopo uzdevumus pēc statusa, aprēķinot skaitu un apvienotos nosaukumus.
             - Izveido sarakstu, kas satur katra statusa statusu, skaitu un uzdevumu nosaukumu.
             - Atgriež sarakstu ar uzdevumiem, kas attēlo uzdevumu kopsavilkumus norādītajā periodā, vai tukšu sarakstu, ja CSV fails nav atrasts.
-# Testēšana
+### Testēšana
 - Lietotnes testēšanu veicām aktīvi, strādājot pie tās izstrādes. Pirms veicām izmaiņas un saglabāju tās, mēs pārbaudīju, vai viss darbojas kā iepriekš. Šīs pārbaudes palīdzēja novērst jebkādas kļūdas un saglabāt lietotnes stabilitāti.
 - Vērts minēt, ka lietotne nav testēta ar lielu datu apjomu, tādēļ nav zināms vai neradīsies nekādi veikstpējas tracuējumu aplikācijā.
 ## Izmantotās literatūras un datu avotu saraksts
