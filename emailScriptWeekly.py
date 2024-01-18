@@ -86,8 +86,8 @@ class UzdProgressaEpasts:
 
 if __name__ == "__main__":
     # Aizstāt šīs vērtības ar savu faktisko e-pasta un SMTP servera informāciju
-    sutitajs = UzdProgressaEpasts(e_pasta_adrese='automatizesanaprojekts@gmail.com',
-                                    e_pasta_parole='yxky ziex drzo etuo',
+    sutitajs = UzdProgressaEpasts(e_pasta_adrese='',
+                                    e_pasta_parole='',
                                     smtp_serveris='smtp.gmail.com',
                                     smtp_ports=587)
 
