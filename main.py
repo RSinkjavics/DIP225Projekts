@@ -19,8 +19,6 @@ class TaskManagerApp:
 
         self.atjauno_treeview()
 
-        self.statusa_izvelne()
-
         self.izv_uzd = None
         self.kart_var = tk.StringVar(value='Nekā')
         self.kart_sec_var = tk.StringVar(value='Augoša')
@@ -32,12 +30,6 @@ class TaskManagerApp:
         else:
             self.uzd_dati = pd.DataFrame(columns=['Izveides Datums', 'Nosaukums', 'Apraksts', 'Izpildes Datums', 'Statuss'])
 
-    def statusa_izvelne(self):
-        self.statuss_menu = tk.Menu(self.root, tearoff=0)
-        satusu_opcijas = ['Pending', 'Hold', 'Completed', 'Failed']
-        for option in satusu_opcijas:
-            self.statuss_menu.add_command(label=option, command=lambda s=option: self.atjauno_statusu(s))
-
     def saskarnes_izveide(self):
         self.nosaukums_var = tk.StringVar()
         self.apraksts_var = tk.StringVar()
@@ -47,24 +39,27 @@ class TaskManagerApp:
         self.ievades_lauki("Apraksts:", 1, 0)
         self.datuma_ievade("Izpildes Datums:", 2, 0)
 
-        ttk.Button(self.root, text="Saglabāt uzdevumu", command=self.save_uzd).grid(row=3, column=0, columnspan=2, pady=10)
+        ttk.Button(self.root, text="Saglabāt uzdevumu", command=self.save_uzd).place(x=80, y=120)
 
-        self.uzd_treeview = ttk.Treeview(self.root, columns=('Nosaukums', 'Apraksts', 'Izpildes Datums', 'Statuss'), show='headings')
-        self.uzd_treeview.grid(row=4, column=0, columnspan=2, pady=10, sticky=tk.W + tk.E)
-
+        self.uzd_treeview = ttk.Treeview(self.root, columns=('Nosaukums', 'Apraksts', 'Izpildes Datums', 'Statuss'), show='headings', height=18)
+        self.uzd_treeview.place(x=300, y=7)
         self.uzd_treeview.heading('Nosaukums', text='Nosaukums')
+        self.uzd_treeview.column("Nosaukums",minwidth=0,width=100, stretch=0)
         self.uzd_treeview.heading('Apraksts', text='Apraksts')
+        self.uzd_treeview.column("Apraksts",minwidth=0,width=200, stretch=0)
         self.uzd_treeview.heading('Izpildes Datums', text='Izpildes Datums')
+        self.uzd_treeview.column("Izpildes Datums",minwidth=0,width=125, stretch=0)
         self.uzd_treeview.heading('Statuss', text='Statuss')
+        self.uzd_treeview.column("Statuss",minwidth=0,width=100, stretch=0)
 
         self.uzd_treeview.bind('<ButtonRelease-1>', self.handle_treeview_click)
 
-        ttk.Button(self.root, text="Atjaunot Statusu", command=self.atjauno_statusu).grid(row=5, column=0, pady=10)
-        ttk.Button(self.root, text="Izdzēst", command=self.izdzest_uzd).grid(row=5, column=1, pady=10)
-        ttk.Button(self.root, text="Filtrēt/Kārtot", command=self.filtru_popup).grid(row=6, column=0, columnspan=2, pady=10)
+        ttk.Button(self.root, text="Atjaunot Statusu", command=self.atjauno_statusu).place(x=5, y=175)
+        ttk.Button(self.root, text="Izdzēst", command=self.izdzest_uzd).place(x=120, y=175)
+        ttk.Button(self.root, text="Filtrēt/Kārtot", command=self.filtru_popup).place(x=200, y=175)
 
         self.pazinojums = ttk.Label(self.root, text="", foreground="red")
-        self.pazinojums.grid(row=0, column=1, pady=10)
+        self.pazinojums.place(x=10, y=220)
 
     def ievades_lauki(self, inp_teksts, row, column):
         label = ttk.Label(self.root, text=inp_teksts)
@@ -122,9 +117,9 @@ class TaskManagerApp:
             current_statuss = values[3]
 
             popup = tk.Toplevel(self.root)
-            popup.title("Atajunot Statusu")
+            popup.title("")
 
-            ttk.Label(popup, text=f"Šobrīdējais statuss: {current_statuss}").pack(pady=5)
+            ttk.Label(popup, text=f"Šībrīža statuss: {current_statuss}").pack(pady=20, padx=20)
 
             izv_statuss = tk.StringVar()
             for option in ['Nav sākts', 'Progresā', 'Aizturēts', 'Nepabeigts', 'Pabeigts']:
@@ -188,22 +183,22 @@ class TaskManagerApp:
         popup = tk.Toplevel(self.root)
         popup.title("Filtrēt/kārtot uzdevumus")
 
-        ttk.Label(popup, text="Kārtot pēc:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+        ttk.Label(popup, text="Kārtot pēc:").grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
         kart_opc = ['Nekā', 'Nosaukums', 'Izpildes Datums', 'Statuss']
         kart_izv = ttk.Combobox(popup, textvariable=self.kart_var, values=kart_opc)
-        kart_izv.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
+        kart_izv.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
 
-        ttk.Label(popup, text="Kārtošanas secība:").grid(row=0, column=2, padx=5, pady=5, sticky=tk.W)
+        ttk.Label(popup, text="Kārtošanas secība:").grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
         kart_sec_opc = ['Augoša', 'Dilstoša']
         kart_sec_izv = ttk.Combobox(popup, textvariable=self.kart_sec_var, values=kart_sec_opc)
-        kart_sec_izv.grid(row=0, column=3, padx=5, pady=5, sticky=tk.W)
+        kart_sec_izv.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W)
 
-        ttk.Label(popup, text="Filtrēt:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        ttk.Label(popup, text="Filtrēt:").grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
         filtru_opc = ['Visus', 'Nav sākts', 'Progresā', 'Aizturēts', 'Nepabeigts', 'Pabeigts']
         filtru_izv = ttk.Combobox(popup, textvariable=self.filtra_var, values=filtru_opc)
-        filtru_izv.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
+        filtru_izv.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
 
-        ttk.Button(popup, text="Apstiprināt", command=lambda: self.pielietot_filtrus(popup, self.kart_var.get(), self.kart_sec_var.get(), self.filtra_var.get())).grid(row=2, column=0, columnspan=4, pady=10)
+        ttk.Button(popup, text="Apstiprināt", command=lambda: self.pielietot_filtrus(popup, self.kart_var.get(), self.kart_sec_var.get(), self.filtra_var.get())).grid(row=3, column=0, columnspan=4, pady=10)
 
     def pielietot_filtrus(self, popup, kartot, kartot_sec, filtrs):
         current_kart = self.kart_var.get()
@@ -238,7 +233,7 @@ class TaskManagerApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("810x480")
-    root.configure(bg="#5E4352")
+    root.geometry("838x398")
+    root.configure(bg="#e6e6e6")
     app = TaskManagerApp(root)
     root.mainloop()
